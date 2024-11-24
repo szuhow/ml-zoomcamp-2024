@@ -1,9 +1,3 @@
-Sure, here is the updated 
-
-README.md
-
- with the requested additions:
-
 # Diabetes Prediction using Random Forest
 
 This project aims to predict the presence of diabetes in patients using the Random Forest algorithm. The dataset contains various health-related features of patients, and the goal is to build a model that can accurately predict whether a patient has diabetes based on these features.
