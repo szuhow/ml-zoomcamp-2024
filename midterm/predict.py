@@ -63,11 +63,9 @@ def create_dataframe(data: List[InputFeatures]) -> pd.DataFrame:
     # Apply age range and BMI group
     df = df.apply(set_age_range_and_bmi_group, axis=1)
     
-    X_encoded = dv.transform(df.to_dict(orient='records'))
-    
-    # Combine numeric and categorical features
-    # X_numeric = df[numeric_features].reset_index(drop=True)
-    X_processed = pd.concat([pd.DataFrame(X_encoded)], axis=1)
+    # Convert all features using DictVectorizer
+    data_dict = df.to_dict(orient='records')
+    X_processed = dv.transform(data_dict)
     
     return X_processed
 

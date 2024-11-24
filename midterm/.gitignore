@@ -5,3 +5,4 @@
 !.elasticbeanstalk/*.global.yml
 .venv
 *.joblib
+.ipynb_checkpoints

@@ -9,14 +9,13 @@ This project aims to predict the presence of diabetes in patients using the Rand
 3. [Installation](#installation)
 4. [Usage](#usage)
 5. [Exploratory Data Analysis (EDA) and Feature Engineering](#exploratory-data-analysis-eda-and-feature-engineering)
-6. [Data Preprocessing](#data-preprocessing)
-7. [Model Training](#model-training)
-8. [Model Evaluation](#model-evaluation)
-9. [Hyperparameter Tuning](#hyperparameter-tuning)
-10. [Handling Imbalanced Data](#handling-imbalanced-data)
-11. [Conclusion](#conclusion)
-12. [Additional Recommendations](#additional-recommendations)
-13. [Training the model](#training-the-model)
+6. [Model Training](#model-training)
+7. [Model Evaluation](#model-evaluation)
+8. [Hyperparameter Tuning](#hyperparameter-tuning)
+9. [Handling Imbalanced Data](#handling-imbalanced-data)
+10. [Conclusion](#conclusion)
+11. [Additional Recommendations](#additional-recommendations)
+12. [Training the model](#training-the-model)
 13. [Using the model](#using-the-model)
 
 ## Project Overview
@@ -37,9 +36,9 @@ The dataset used in this project is `diabetes_prediction_dataset.csv`. It contai
 - `blood_glucose_level`: Blood glucose level of the patient
 - `diabetes`: Whether the patient has diabetes (0: No, 1: Yes)
 
-## Installation+
+## Installation
 
-First, you need to have Poetry installed. If you don't have Poetry installed, you can install it by following the instructions on the [Poetry website](https://python-poetry.org/docs/#installation).
+First, the Poetry need to be installed. If you don't have Poetry installed, you can install it by following the instructions on the [Poetry website](https://python-poetry.org/docs/#installation).
 
 
 First, configure Poetry to create virtual environments inside the project directory:
@@ -48,7 +47,7 @@ First, configure Poetry to create virtual environments inside the project direct
 poetry config virtualenvs.in-project true
 ```
 
-Then, install the dependencies:
+Then, install the dependencies (based on pyptoject.toml and corresponding poetry.lock):
 
 ```bash
 poetry install
@@ -66,7 +65,12 @@ poetry run jupyter notebook
 
 To use the Poetry virtual environment as the kernel in Jupyter Notebook, use created .venv environment as kernel.
 
-![alt text](image.png)
+```bash
+poetry shell
+ipython kernel install --name "midterm" --user 
+```
+![alt text](image-1.png)
+![alt text](image-2.png)
 
 
 
@@ -80,10 +84,6 @@ We explore creating new features or transforming existing ones to provide the mo
 During EDA, we create new features such as `bmi_category` and `age_range`:
 - **BMI Category**: Categorizes the BMI values into groups such as Underweight, Normal, Overweight, and Obese.
 - **Age Range**: Categorizes the age values into ranges such as 0-18, 19-30, 31-45, 46-60, and 60+.
-
-## Data Preprocessing
-
-We preprocess the data by encoding categorical variables and creating new features (`age_range` and `bmi_category`) from existing ones. This helps in providing more informative inputs to the model.
 
 ## Model Training
 
@@ -105,14 +105,13 @@ If the dataset has an imbalanced distribution of classes, we use techniques like
 
 The Random Forest model achieved an accuracy of approximately 95%, indicating a high level of performance in predicting diabetes based on the provided features. The confusion matrix and classification report further confirm the model's reliability, showing minimal false positives and false negatives. Feature importance analysis reveals which factors are most influential in the predictions, providing valuable insights for healthcare professionals.
 
-## Additional Recommendations
+## Additional Consideration
 
-- **Cross-Validation:** Implement cross-validation using `cross_val_score` to obtain a more robust evaluation of the model's performance.
-- **Hyperparameter Tuning:** Utilize techniques like `GridSearchCV` or `RandomizedSearchCV` to find the optimal hyperparameters for the Random Forest model, potentially enhancing its performance.
-- **Handling Imbalanced Data:** If the dataset has an imbalanced distribution of classes, consider using techniques like SMOTE or undersampling to balance the classes.
+- **Hyperparameter Tuning:** We utilize techniques like `GridSearchCV` to find the optimal hyperparameters for the Random Forest model, potentially enhancing its performance.
+- **Handling Imbalanced Data:** If the dataset has an imbalanced distribution of classes, we may consider using techniques like SMOTE or undersampling to balance the classes.
 - **Feature Engineering:** Explore creating new features or transforming existing ones to provide the model with more informative inputs.
 
-By following these recommendations, you can further improve the model's performance and gain deeper insights into the factors influencing diabetes.
+By following these recommendations, we further improve the model's performance and gain deeper insights into the factors influencing diabetes.
 
 ## Training the model
 To train the model, run the following command:
@@ -140,8 +139,7 @@ To use the model, follow these steps:
 docker build -t predict:latest .
 ```
 
-2. Run the Docker Container
-Run the Docker container using the following command:
+2. Run the Docker container using the following command:
 
 ```bash
 docker run -d -p 9696:9696 predict:latest

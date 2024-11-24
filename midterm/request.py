@@ -7,11 +7,11 @@ url = "http://localhost:9696/predict"
 sample_data = [
     {
         "gender": "Female",
-        "age": 44,
+        "age": 80,
         "hypertension": 0,
         "heart_disease": 0,
         "smoking_history": "never",
-        "bmi": 19.31,
+        "bmi": 30.31,
         "hba1c_level": 6.5,
         "blood_glucose_level": 200
     },
