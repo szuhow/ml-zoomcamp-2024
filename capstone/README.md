@@ -25,7 +25,7 @@ In this project, we use a dataset containing various health-related features of 
 
 ## Dataset
 
-The dataset used in this project is `diabetes_prediction_dataset.csv`. It contains the following columns [1]:
+The dataset used in this project is `heart.csv` [1]. It contains the following columns [1]:
 
 - `Age`: Age of the patient [years]
 - `Sex`: Sex of the patient [M: Male, F: Female]
@@ -67,31 +67,39 @@ poetry run jupyter notebook
 
 ## Setting the Kernel to Use Poetry Virtual Environment:
 
-To use the Poetry virtual environment as the kernel in Jupyter Notebook, use created .venv environment as kernel.
+To use the Poetry virtual environment as the kernel in Jupyter Notebook, use created (in directory containing the project files) .venv environment as kernel.
 
-```bash
-poetry shell
-ipython kernel install --name "capstone" --user 
-```
-![alt text](image-1.png)
-![alt text](image-2.png)
+   ```bash
+   poetry shell
+   ipython kernel install --name "capstone" --user 
+   ```
+![alt text](images/image1.png)
 
 
 
 ## Exploratory Data Analysis (EDA) and Feature Engineering
 
+Before building the model, we perform exploratory data analysis (EDA) to understand the structure of the data and check for any inconsistencies or missing values. This includes visualizing the distribution of the target variable (heartdisease) and other features.
+
+Exploratory Data Analysis (EDA)
+Distribution of Target Variable:
+
+1. We visualize the distribution of the heartdisease variable to understand the proportion of patients with and without heart disease.
+
+2. Feature Distributions:
+We plot the distributions of various features such as age, sex, chestpaintype, restingbp, cholesterol, fastingbs, restingecg, maxhr, exerciseangina, oldpeak, and st_slope to understand their spread and identify any potential outliers.
+
+3. Correlation Analysis:
+We create a correlation matrix to identify the relationships between different features and the target variable. This helps in understanding which features are most strongly associated with heart disease.
+
+4. Handling Missing Values:
+We check for any missing values in the dataset and handle them appropriately, either by imputing them or removing the affected rows.
 
 
-Before building the model, we perform exploratory data analysis to understand the structure of the data and check for any inconsistencies or missing values. This includes visualizing the distribution of the target variable (`diabetes`) and other features.
-
-We explore creating new features or transforming existing ones to provide the model with more informative inputs.
-During EDA, we create new features such as `bmi_category` and `age_range`:
-- **BMI Category**: Categorizes the BMI values into groups such as Underweight, Normal, Overweight, and Obese.
-- **Age Range**: Categorizes the age values into ranges such as 0-18, 19-30, 31-45, 46-60, and 60+.
 
 ## Model Training
 
-We use the Random Forest algorithm to train our model on the training data. The model is trained using the `RandomForestClassifier` from `sklearn`.
+In project we use Random Forest and XGBoost classifiers to predict the presence of diabetes in patients based on the provided features. We train the models using the processed data and evaluate their performance using various metrics.
 
 ## Model Evaluation
 
@@ -99,11 +107,8 @@ We evaluate the model's performance using various metrics such as accuracy, conf
 
 ## Hyperparameter Tuning
 
-We use `GridSearchCV` to perform hyperparameter tuning and find the optimal hyperparameters for the Random Forest model. This helps in enhancing the model's performance.
+We use `GridSearchCV` to perform hyperparameter tuning and find the optimal hyperparameters for the Random Forest and XGBoost model. This helps in enhancing the model's performance.
 
-## Handling Imbalanced Data
-
-If the dataset has an imbalanced distribution of classes, we use techniques like SMOTE (Synthetic Minority Over-sampling Technique) to balance the classes and improve the model's performance.
 
 ## Conclusion
 
@@ -120,9 +125,9 @@ By following these recommendations, we further improve the model's performance a
 ## Training the model
 To train the model, run the following command:
 
-```bash
-python train.py
-```
+   ```bash
+   python train.py
+   ```
 
 **Using an Existing Model**
 
@@ -139,23 +144,35 @@ To use the model, follow these steps:
 
 1. Build the Docker image using the following command:
 
-```bash
-docker build -t predict:latest .
-```
+   ```bash
+   docker build -t predict:latest .
+   ```
 
 2. Run the Docker container using the following command:
 
-```bash
-docker run -d -p 9696:9696 predict:latest
-```
+   ```bash
+   docker run -d -p 9696:9696 predict:latest
+   ```
 
 This will start the FastAPI application inside the Docker container, and it will be accessible at http://localhost:9696.
 
 3. Run the request.py script to send data to the FastAPI endpoint and get predictions:
 
-```bash
-python request.py
-```
+   ```bash
+   python request.py
+   ```
+
+**Using the Streamlist App**
+
+To use the Streamlit app for heart disease prediction, follow these steps:
+
+1. Navigate to the directory containing the app.py file.
+
+2. Run the Streamlit app using the following command:
+
+   ```bash
+   streamlit run app.py
+   ```
 
 
 ## Bibliography
