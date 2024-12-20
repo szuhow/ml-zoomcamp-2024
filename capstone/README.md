@@ -1,6 +1,6 @@
-# Diabetes Prediction using Random Forest
+# Heart Disease Prediction using XGBoost
 
-This project aims to predict the presence of diabetes in patients using the Random Forest algorithm. The dataset contains various health-related features of patients, and the goal is to build a model that can accurately predict whether a patient has diabetes based on these features.
+This project focuses on predicting the presence of heart disease in patients using the XGBoost algorithm. It leverages a dataset with various health-related features to build a predictive model that evaluates the likelihood of heart disease based on these attributes.
 
 ## Table of Contents
 
@@ -21,7 +21,7 @@ This project aims to predict the presence of diabetes in patients using the Rand
 
 ## Project Overview
 
-In this project, we use a dataset containing various health-related features of patients to predict the presence of diabetes. We employ the Random Forest algorithm for this task and evaluate the model's performance using various metrics.
+The aim of this project is to create a machine learning pipeline to predict heart disease from health-related features. The dataset includes variables such as age, cholesterol levels, and exercise-induced angina. Using XGBoost, we strive to achieve accurate predictions and provide valuable insights into the contributing factors.
 
 ## Dataset
 
@@ -42,6 +42,9 @@ The dataset used in this project is `heart.csv` [1]. It contains the following c
 
 ## Installation
 
+<!-- write assumption that we are working with linux or macos system -->
+
+To run this project, you need to have Python installed on your system. You can download Python from the [official website](https://www.python.org/downloads/). In terms of OS, we assume that you are working with a Linux or macOS system, however, the project should also work on Windows (assuming you have the necessary dependencies installed).
 First, the Poetry need to be installed. If you don't have Poetry installed, you can install it by following the instructions on the [Poetry website](https://python-poetry.org/docs/#installation).
 
 
@@ -99,28 +102,31 @@ We check for any missing values in the dataset and handle them appropriately, ei
 
 ## Model Training
 
-In project we use Random Forest and XGBoost classifiers to predict the presence of diabetes in patients based on the provided features. We train the models using the processed data and evaluate their performance using various metrics.
+We use Random Forest and XGBoost classifiers to predict the presence of heart disease based on the provided features. The models are trained using processed data and evaluated using various metrics.
 
 ## Model Evaluation
 
-We evaluate the model's performance using various metrics such as accuracy, confusion matrix, classification report, and ROC curve. We also analyze the feature importance to understand which features contribute most to the prediction.
+The models’ performance is evaluated using metrics such as accuracy, confusion matrix, classification report, and ROC curve. Additionally, feature importance analysis reveals which features contribute most to the prediction.
 
 ## Hyperparameter Tuning
 
-We use `GridSearchCV` to perform hyperparameter tuning and find the optimal hyperparameters for the Random Forest and XGBoost model. This helps in enhancing the model's performance.
+We use GridSearchCV to perform hyperparameter tuning and find the optimal hyperparameters for the models, enhancing their performance.
 
 
 ## Conclusion
 
-The Random Forest model achieved an accuracy of approximately 95%, indicating a high level of performance in predicting diabetes based on the provided features. The confusion matrix and classification report further confirm the model's reliability, showing minimal false positives and false negatives. Feature importance analysis reveals which factors are most influential in the predictions, providing valuable insights for healthcare professionals.
+The XGBoost classifier achieved a high accuracy, demonstrating its effectiveness in predicting heart disease. The feature importance analysis provides insights into the most influential factors, aiding healthcare professionals in better understanding patient risks.
 
 ## Additional Consideration
 
-- **Hyperparameter Tuning:** We utilize techniques like `GridSearchCV` to find the optimal hyperparameters for the Random Forest model, potentially enhancing its performance.
-- **Handling Imbalanced Data:** If the dataset has an imbalanced distribution of classes, we may consider using techniques like SMOTE or undersampling to balance the classes.
+Additional Considerations
+
+- **Handling Imbalanced Data:** If the dataset is imbalanced, techniques like SMOTE or undersampling can be used to balance the classes.
+
 - **Feature Engineering:** Explore creating new features or transforming existing ones to provide the model with more informative inputs.
 
-By following these recommendations, we further improve the model's performance and gain deeper insights into the factors influencing diabetes.
+- **Explaining Model Predictions:** Consider using SHAP (SHapley Additive exPlanations) for model interpretability.
+
 
 ## Training the model
 To train the model, run the following command:
@@ -142,7 +148,7 @@ This will generate the model and save it along with the DictVectorizer in the cu
 
 To use the model, follow these steps:
 
-1. Build the Docker image using the following command:
+1. Build the Docker image using the following command (please notice requirements.txt file for dockerized version, in comparison to pyproject.toml file for local version):
 
    ```bash
    docker build -t predict:latest .

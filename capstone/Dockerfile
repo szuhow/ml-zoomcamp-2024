@@ -8,21 +8,17 @@ RUN adduser --home=/home/mlz mlz && usermod -a -G 0 mlz
 
 RUN pip install --upgrade pip
 
-RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry python3 -
+WORKDIR /app
 
-RUN chgrp -R 0 /opt/poetry && \
-    chmod -R g=u /opt/poetry
+# Copy the requirements file into the container
+COPY requirements.txt .
 
-USER mlz
-ENV PATH="/opt/poetry/bin:$PATH"
+# Install any needed packages specified in requirements-docker.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /home/mlz
-
-COPY poetry.lock pyproject.toml ./
-RUN poetry config virtualenvs.in-project true && \
-    poetry install --no-interaction --without dev --no-root
-COPY ["predict.py", "*.joblib", "./"]
+# Copy the rest of the application code into the container
+COPY . .
 
 EXPOSE 9696
 
-CMD ["poetry", "run", "gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "predict:app", "--bind", "0.0.0.0:9696"]
+CMD ["uvicorn", "predict:app", "--host", "0.0.0.0", "--port", "9696"]

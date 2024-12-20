@@ -42,7 +42,7 @@ def main():
     """)
 
     # Display an image
-    st.image('images/heart_image.jpeg', caption='Heart Disease Prediction', width=400)
+    st.image('images/heart_image.jpeg', caption='Heart Disease Prediction')
 
     input_df = user_input_features()
 

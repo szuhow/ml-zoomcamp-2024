@@ -21,15 +21,15 @@ sample_data = [
     {
         'age': 54, 
         'sex': 'M', 
-        'chestpaintype': 'ASY', 
+        'chestpaintype': 'TA', 
         'restingbp': 125, 
         'cholesterol': 224, 
         'fastingbs': 0, 
         'restingecg': 'Normal', 
         'maxhr': 122, 
         'exerciseangina': 'N', 
-        'oldpeak': 2.0, 
-        'st_slope': 'Flat'
+        'oldpeak': 0, 
+        'st_slope': 'Up'
     }
 ]
 
@@ -38,6 +38,6 @@ response = requests.post(url, json=sample_data)
 
 # Print the response
 if response.status_code == 200:
-    print("Predictions:", response.json())
+    print("Predictions:", response.json()["predictions"])
 else:
     print("Error:", response.status_code, response.text)
